@@ -1,4 +1,3 @@
-using Extensions;
 using Unity.Entities;
 
 namespace Components
@@ -6,26 +5,26 @@ namespace Components
     /// <summary>
     /// 
     /// </summary>
-    public struct DrivetrainComponent : IComponentData
+    public struct FrontDifferentialComponent : IComponentData
     {
         /// <summary>
-        /// 
+        /// Left wheel
         /// </summary>
-        public DriveType driveType;
+        public Entity leftWheel;
+
+        /// <summary>
+        /// Right wheel
+        /// </summary>
+        public Entity rightWheel;
 
         /// <summary>
         /// 
         /// </summary>
-        public TransmissionType transmissionType;
+        public float finalDriveRatio;
 
         /// <summary>
-        /// 
+        /// In [N/m]
         /// </summary>
-        public bool isIgnited;
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public bool isEngineRunning;
-    } 
+        public float outputTorque;
+    }
 }

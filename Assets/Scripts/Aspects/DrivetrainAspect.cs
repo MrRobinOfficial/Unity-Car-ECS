@@ -1,4 +1,5 @@
 using Components;
+using Extensions;
 using Unity.Entities;
 
 namespace Aspects
@@ -6,30 +7,42 @@ namespace Aspects
     public readonly partial struct DrivetrainAspect : IAspect
     {
         private readonly Entity entity;
+
+        /* READ-ONLY */
+
         private readonly RefRO<DrivetrainComponent> drivetrain;
+
+        /* READ-WRITE */
+
         private readonly RefRW<EngineComponent> engine;
         private readonly RefRW<ClutchComponent> clutch;
         private readonly RefRW<GearboxComponent> gearbox;
-        private readonly RefRW<DifferentialComponent> centerDifferential;
+        private readonly RefRW<CenterDifferentialComponent> centerDifferential;
+        private readonly RefRW<FrontDifferentialComponent> frontDifferential;
+        private readonly RefRW<RearDifferentialComponent> rearDifferential;
 
         public void Simulate(float DeltaTime)
         {
-            var drivetrainType = drivetrain.ValueRO.type;
+            var driveType = drivetrain.ValueRO.driveType;
 
-            switch (drivetrainType)
+            switch (driveType)
             {
-                case DrivetrainType.FWD:
+                case DriveType.FWD:
                     Simulate_FWD();
                     break;
 
-                case DrivetrainType.RWD:
+                case DriveType.RWD:
                     Simulate_RWD();
                     break;
 
-                case DrivetrainType.AWD:
+                case DriveType.AWD:
                     Simlate_AWD();
                     break;
             }
+
+            frontDifferential.ValueRW.outputTorque = frontDifferential.ValueRO.finalDriveRatio * centerDifferential.ValueRO.frontOutputTorque;
+
+            rearDifferential.ValueRW.outputTorque = rearDifferential.ValueRO.finalDriveRatio * centerDifferential.ValueRO.rearOutputTorque;
         }
 
         private void Simulate_FWD()
