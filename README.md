@@ -12,6 +12,7 @@
 This repo is built by using [Unity DOTS](https://unity.com/dots).
   
 [![license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/mrrobinofficial/Unity-Car-ECS/blob/HEAD/LICENSE.txt)
+![maintenance-status](https://img.shields.io/badge/maintenance-as--is-yellow.svg)
 
 </div>
 
