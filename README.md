@@ -17,7 +17,7 @@ This repo is built by using [Unity DOTS](https://unity.com/dots).
 </div>
 
 > [!CAUTION]
-> This project is currently on iced. Meaning, there is no active development.
+> Currently, this project is iced. Meaning, there is no active development.
 
 ## Installation
 
